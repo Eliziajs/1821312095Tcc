@@ -21,8 +21,9 @@ public class GeneroResource {
 	@Autowired
 	private GeneroService service;
 	
+	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Optional<Genero>> find(@PathVariable Integer id) {
 		Optional<Genero> obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj);
 
