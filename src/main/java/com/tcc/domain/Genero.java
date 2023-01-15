@@ -1,13 +1,19 @@
 package com.tcc.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -28,6 +34,10 @@ public class Genero implements Serializable {
 	public Genero() {
 		
 	}
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy="generos")
+	List <Filme> filmes = new ArrayList<>();
 
 	public Genero(Integer id, String descricao) {
 		super();
@@ -49,6 +59,14 @@ public class Genero implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public List<Filme> getFilmes() {
+		return filmes;
+	}
+
+	public void setFilmes(List<Filme> filmes) {
+		this.filmes = filmes;
 	}
 
 	@Override

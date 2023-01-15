@@ -1,14 +1,20 @@
+//muitos p um o proprio contrutor faz a associação do muitos p um
+
 package com.tcc.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,14 +25,29 @@ public class Filme implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	@Column(name="titulo")
 	private String titulo;
+	@Column(name="ano")
 	private Integer ano;
+	@Column(name="sinopse")
 	private String sinopse;
 	
-	private List<Genero> generos = new ArrayList<>();
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name="genero_id")
+	private Genero generos;
 	
 	public Filme() {
 		
+	}
+
+	public Filme(Integer id, String titulo, Integer ano, String sinopse, Genero generos) {
+		super();
+		this.id = id;
+		this.titulo = titulo;
+		this.ano = ano;
+		this.sinopse = sinopse;
+		this.generos = generos;
 	}
 
 	public Filme(Integer id, String titulo, Integer ano, String sinopse) {
@@ -68,11 +89,12 @@ public class Filme implements Serializable{
 	public void setSinopse(String sinopse) {
 		this.sinopse = sinopse;
 	}
-	public List<Genero> getGeneros() {
+
+	public Genero getGeneros() {
 		return generos;
 	}
 
-	public void setGeneros(List<Genero> generos) {
+	public void setGeneros(Genero generos) {
 		this.generos = generos;
 	}
 
