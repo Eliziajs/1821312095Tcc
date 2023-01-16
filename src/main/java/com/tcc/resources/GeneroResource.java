@@ -1,6 +1,5 @@
 package com.tcc.resources;
 
-
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tcc.domain.Genero;
 import com.tcc.services.GeneroService;
 
-
 @RestController
-@RequestMapping(value="/generos")
+@RequestMapping(value = "/generos")
 public class GeneroResource {
-	
+
 	@Autowired
 	private GeneroService service;
-	
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Genero>> find(@PathVariable Integer id) {
 		Optional<Genero> obj = service.buscar(id);

@@ -16,28 +16,26 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-
-
 @Entity
-@Table (name="generos")
+@Table(name = "generos")
 public class Genero implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	@GeneratedValue(strategy = GenerationType.IDENTITY )
+
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@Column(name="id")
+	@Column(name = "id")
 	private Integer id;
-	
+
 	@Column(name = "descricao")
 	private String descricao;
-	
+
 	public Genero() {
-		
+
 	}
-	
+
 	@JsonManagedReference
-	@OneToMany(mappedBy="generos")
-	List <Filme> filmes = new ArrayList<>();
+	@OneToMany(mappedBy = "generos")
+	List<Filme> filmes = new ArrayList<>();
 
 	public Genero(Integer id, String descricao) {
 		super();
@@ -85,5 +83,5 @@ public class Genero implements Serializable {
 		Genero other = (Genero) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 }

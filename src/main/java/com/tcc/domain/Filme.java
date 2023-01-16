@@ -18,27 +18,27 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="filmes")
-public class Filme implements Serializable{
-	private static final long serialVersionUID =1l;
+@Table(name = "filmes")
+public class Filme implements Serializable {
+	private static final long serialVersionUID = 1l;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@Column(name="titulo")
+	@Column(name = "titulo")
 	private String titulo;
-	@Column(name="ano")
+	@Column(name = "ano")
 	private Integer ano;
-	@Column(name="sinopse")
+	@Column(name = "sinopse")
 	private String sinopse;
-	
+
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name="genero_id")
+	@JoinColumn(name = "genero_id")
 	private Genero generos;
-	
+
 	public Filme() {
-		
+
 	}
 
 	public Filme(Integer id, String titulo, Integer ano, String sinopse, Genero generos) {
@@ -114,5 +114,5 @@ public class Filme implements Serializable{
 		Filme other = (Filme) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 }
