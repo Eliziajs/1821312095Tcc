@@ -11,13 +11,14 @@ import com.tcc.services.exception.ObjetoNaoEncontrado;
 
 @Service
 public class DiretorService {
-	
+
 	@Autowired
 	DiretorRepository repo;
 
-	public Optional<Diretor> buscar(Integer id){
+	public Optional<Diretor> buscar(Integer id) {
 		Optional<Diretor> obj = repo.findById(id);
-		return Optional.ofNullable(obj.orElseThrow(() -> new ObjetoNaoEncontrado("Diretor ainda não cadastrado! Id:" + id + ", Tipo: " + Diretor.class.getName())));
-		
+		return Optional.ofNullable(obj.orElseThrow(() -> new ObjetoNaoEncontrado(
+				"Diretor ainda não cadastrado! Id:" + id + ", Tipo: " + Diretor.class.getName())));
+
 	}
 }

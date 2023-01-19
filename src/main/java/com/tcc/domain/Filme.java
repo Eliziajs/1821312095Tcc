@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,12 +32,13 @@ public class Filme implements Serializable {
 	@Column(name = "sinopse")
 	private String sinopse;
 
-	@JsonBackReference
+
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "genero_id")	
 	private Genero generos;
 
-	@JsonBackReference
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "diretor_id")	
 	private Diretor diretor;

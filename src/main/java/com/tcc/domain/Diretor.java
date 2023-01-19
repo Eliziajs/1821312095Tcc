@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +27,9 @@ public class Diretor implements Serializable {
 	@Column(name="nome")
 	private String nome;
 	
+	@JsonBackReference
 	@OneToMany(mappedBy = "diretor")
+	
 	List<Filme> filmes = new ArrayList<>();
 
 	public Diretor() {

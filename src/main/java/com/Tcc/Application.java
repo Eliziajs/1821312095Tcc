@@ -45,7 +45,7 @@ public class Application implements CommandLineRunner {
 		
 		d1.getFilmes().addAll(Arrays.asList(f1));
 		d2.getFilmes().addAll(Arrays.asList(f2));
-		// f2.getGeneros().add(Arrays.asList(gen2));
+
 		
 		generoRepository.saveAll(Arrays.asList(gen1, gen2));
 		diretorRepository.saveAll(Arrays.asList(d1,d2));

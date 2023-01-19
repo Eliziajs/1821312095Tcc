@@ -18,7 +18,7 @@ public class GeneroService {
 	public Optional<Genero> buscar(Integer id) {
 		Optional<Genero> obj = repo.findById(id);
 
-		return Optional.ofNullable(obj.orElseThrow(
-				() -> new ObjetoNaoEncontrado("Genero ainda não cadastrado! Id:" + id + ", Tipo: " + Genero.class.getName())));
+		return Optional.ofNullable(obj.orElseThrow(() -> new ObjetoNaoEncontrado(
+				"Genero ainda não cadastrado! Id:" + id + ", Tipo: " + Genero.class.getName())));
 	}
 }
