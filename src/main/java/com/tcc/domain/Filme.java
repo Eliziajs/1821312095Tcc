@@ -32,9 +32,14 @@ public class Filme implements Serializable {
 
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "genero_id")
+	@JoinColumn(name = "genero_id")	
 	private Genero generos;
 
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "diretor_id")	
+	private Diretor diretor;
+	
 	public Filme() {
 
 	}
@@ -46,6 +51,17 @@ public class Filme implements Serializable {
 		this.ano = ano;
 		this.sinopse = sinopse;
 		this.generos = generos;
+	}
+	
+
+	public Filme(Integer id, String titulo, Integer ano, String sinopse, Genero generos, Diretor diretor) {
+		super();
+		this.id = id;
+		this.titulo = titulo;
+		this.ano = ano;
+		this.sinopse = sinopse;
+		this.generos = generos;
+		this.diretor = diretor;
 	}
 
 	public Filme(Integer id, String titulo, Integer ano, String sinopse) {

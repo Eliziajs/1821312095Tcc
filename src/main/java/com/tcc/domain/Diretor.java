@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,31 +14,28 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "generos")
-public class Genero implements Serializable {
+@Table
+public class Diretor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
-	@Column(name = "id")
+	@Column(name="id")
 	private Integer id;
+	@Column(name="nome")
+	private String nome;
+	
+	@OneToMany(mappedBy = "diretor")
+	List<Filme> filmes = new ArrayList<>();
 
-	@Column(name = "descricao")
-	private String descricao;
-
-	public Genero() {
+	public Diretor() {
 
 	}
 
-	@JsonManagedReference
-	@OneToMany(mappedBy = "generos")
-	
-	List<Filme> filmes = new ArrayList<>();
-
-	public Genero(Integer id, String descricao) {
+	public Diretor(Integer id, String nome) {
 		super();
 		this.id = id;
-		this.descricao = descricao;
+		this.nome = nome;
 	}
 
 	public Integer getId() {
@@ -51,12 +46,12 @@ public class Genero implements Serializable {
 		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public List<Filme> getFilmes() {
@@ -80,7 +75,7 @@ public class Genero implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Genero other = (Genero) obj;
+		Diretor other = (Diretor) obj;
 		return Objects.equals(id, other.id);
 	}
 
