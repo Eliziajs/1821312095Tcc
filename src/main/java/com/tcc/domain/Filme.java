@@ -3,9 +3,13 @@
 package com.tcc.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -15,6 +19,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -32,30 +37,23 @@ public class Filme implements Serializable {
 	@Column(name = "sinopse")
 	private String sinopse;
 
-
 	@JsonManagedReference
 	@ManyToOne
-	@JoinColumn(name = "genero_id")	
+	@JoinColumn(name = "genero_id")
 	private Genero generos;
 
 	@JsonManagedReference
 	@ManyToOne
-	@JoinColumn(name = "diretor_id")	
+	@JoinColumn(name = "diretor_id")
 	private Diretor diretor;
-	
+
+	@JsonManagedReference
+	@OneToMany(mappedBy = "id.filme") // id.ator estudar o caso
+	private Set<Personagem> personagem = new HashSet<>();
+
 	public Filme() {
 
 	}
-
-	public Filme(Integer id, String titulo, Integer ano, String sinopse, Genero generos) {
-		super();
-		this.id = id;
-		this.titulo = titulo;
-		this.ano = ano;
-		this.sinopse = sinopse;
-		this.generos = generos;
-	}
-	
 
 	public Filme(Integer id, String titulo, Integer ano, String sinopse, Genero generos, Diretor diretor) {
 		super();
@@ -65,14 +63,15 @@ public class Filme implements Serializable {
 		this.sinopse = sinopse;
 		this.generos = generos;
 		this.diretor = diretor;
+
 	}
 
-	public Filme(Integer id, String titulo, Integer ano, String sinopse) {
-		super();
-		this.id = id;
-		this.titulo = titulo;
-		this.ano = ano;
-		this.sinopse = sinopse;
+	public List<Ator> getAtores() {
+		List<Ator> lista = new ArrayList<>();
+		for (Personagem p : personagem) {
+			lista.add(p.getAtor());
+		}
+		return lista;
 	}
 
 	public Integer getId() {
@@ -113,6 +112,16 @@ public class Filme implements Serializable {
 
 	public void setGeneros(Genero generos) {
 		this.generos = generos;
+	}
+
+	@JsonIgnore
+	public Set<Personagem> getPersonagem() {
+		return personagem;
+	}
+
+	@JsonIgnore
+	public void setPersonagem(Set<Personagem> personagem) {
+		this.personagem = personagem;
 	}
 
 	@Override

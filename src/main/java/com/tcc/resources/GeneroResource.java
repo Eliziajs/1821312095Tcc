@@ -13,7 +13,7 @@ import com.tcc.domain.Genero;
 import com.tcc.services.GeneroService;
 
 @RestController
-@RequestMapping(value = "/generos")
+@RequestMapping(value = "/genero")
 public class GeneroResource {
 
 	@Autowired

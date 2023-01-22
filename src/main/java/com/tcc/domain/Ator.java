@@ -2,10 +2,13 @@ package com.tcc.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,31 +18,31 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "generos")
-public class Genero implements Serializable {
+@Table(name="atores")
+public class Ator implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Id
-	@Column(name = "id")
+	@Column(name="id")
 	private Integer id;
+	@Column(name="nome")
+	private String nome;
 
-	@Column(name = "descricao")
-	private String descricao;
+	List<Filme> filmes = new ArrayList<>();
+	
+	@JsonBackReference
+	@OneToMany(mappedBy="id.ator")
+	private Set<Personagem> personagem = new HashSet<>();
 
-	public Genero() {
+	public Ator() {
 
 	}
 	
-	@JsonBackReference
-	@OneToMany(mappedBy = "generos")
-	
-	List<Filme> filmes = new ArrayList<>();
-
-	public Genero(Integer id, String descricao) {
+	public Ator(Integer id, String nome) {
 		super();
 		this.id = id;
-		this.descricao = descricao;
+		this.nome = nome;
 	}
 
 	public Integer getId() {
@@ -50,20 +53,21 @@ public class Genero implements Serializable {
 		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	
+	public Set<Personagem> getPersonagem() {
+		return personagem;
 	}
 
-	public List<Filme> getFilmes() {
-		return filmes;
-	}
-
-	public void setFilmes(List<Filme> filmes) {
-		this.filmes = filmes;
+	public void setPersonagem(Set<Personagem> personagem) {
+		this.personagem = personagem;
 	}
 
 	@Override
@@ -79,8 +83,10 @@ public class Genero implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Genero other = (Genero) obj;
+		Ator other = (Ator) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	
 
 }
