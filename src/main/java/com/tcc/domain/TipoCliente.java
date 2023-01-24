@@ -1,15 +1,13 @@
 package com.tcc.domain;
 
-public enum Status {
+public enum TipoCliente {
 
-	ATIVO(1, "administrador"),
-	INATIVO(2, "editor"), 
-	REMOVIDO(3, "usuário");
+	ADMINISTRADOR(1, "administrador"), EDITOR(2, "editor"), USUARIO(3, "usuário");
 
 	private int cod;
 	private String descricao;
 
-	private Status(int cod, String descricao) {
+	private TipoCliente(int cod, String descricao) {
 		this.cod = cod;
 		this.descricao = descricao;
 
@@ -23,13 +21,12 @@ public enum Status {
 		return descricao;
 	}
 
-	public static Status toEnum(Integer cod) {
+	public static TipoCliente toEnum(Integer cod) {
 		if (cod == null)
 			return null;
-		for (Status x : Status.values()) {
+		for (TipoCliente x : TipoCliente.values()) {
 			if (cod.equals(x.getCod()))
 				return x;
-
 		}
 		throw new IllegalArgumentException("Código Inválido" + cod);
 	}

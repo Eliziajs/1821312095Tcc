@@ -14,6 +14,8 @@ import com.tcc.domain.Filme;
 import com.tcc.domain.Genero;
 import com.tcc.domain.Personagem;
 import com.tcc.domain.Pessoa;
+import com.tcc.domain.Status;
+import com.tcc.domain.TipoCliente;
 import com.tcc.repository.AtorRepository;
 import com.tcc.repository.DiretorRepository;
 import com.tcc.repository.FilmeRepository;
@@ -71,10 +73,10 @@ public class Application implements CommandLineRunner {
 		//f1.getPersonagem().add((Personagem) Arrays.asList(ator1));
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy hh:mm");
 		
-		Pessoa p1 = new Pessoa(null, "Elizia", sdf.parse("20/09/1980 00:00"), "eliziajs@gmail.com", "Elizia","$$$$$");
-		Pessoa p2 = new Pessoa(null, "João", sdf.parse("04/07/1981 00:00"), "joao@xmail.com", "joão","$$$$$");
-		Pessoa p3 = new Pessoa(null, "Jose", sdf.parse("04/07/1983 00:00"), "jose@xmail.com", "Jose","$$$$$");
-		Pessoa p4 = new Pessoa(null, "Maria", sdf.parse("20/11/1999 00:00"), "maria@xmail.com", "Elizia","$$$$$");
+		Pessoa p1 = new Pessoa(null, "Elizia", sdf.parse("20/09/1980 00:00"), "eliziajs@gmail.com", "Elizia","$$$$$",TipoCliente.ADMINISTRADOR,Status.ATIVO);
+		Pessoa p2 = new Pessoa(null, "João", sdf.parse("04/07/1981 00:00"), "joao@xmail.com", "joão","$$$$$",TipoCliente.USUARIO, Status.ATIVO);
+		Pessoa p3 = new Pessoa(null, "Jose", sdf.parse("04/07/1983 00:00"), "jose@xmail.com", "Jose","$$$$$", TipoCliente.USUARIO, Status.ATIVO);
+		Pessoa p4 = new Pessoa(null, "Maria", sdf.parse("20/11/1999 00:00"), "maria@xmail.com", "Elizia","$$$$$", TipoCliente.USUARIO, Status.INATIVO);
 		
 		p2.getFilmes().addAll(Arrays.asList(f1));
 		p4.getFilmes().addAll(Arrays.asList(f2));

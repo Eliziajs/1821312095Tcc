@@ -35,13 +35,12 @@ public class Pessoa implements Serializable {
 	private String login;
 	@Column(name = "senha")
 	private String senha;
-	// private TipoUsuario tipoUsuario;
-	// private Status status; // ver jakarta transtion
+
+	private int tipo;
+	private int status; // ver jakarta transtion
 
 	@ManyToMany
-	@JoinTable(name = "PESSOA_FILME", 
-	joinColumns = @JoinColumn(name="pessoa_id"),
-	inverseJoinColumns = @JoinColumn(name="filme_id"))
+	@JoinTable(name = "PESSOA_FILME", joinColumns = @JoinColumn(name = "pessoa_id"), inverseJoinColumns = @JoinColumn(name = "filme_id"))
 
 	private List<Filme> filmes = new ArrayList<>();
 
@@ -49,8 +48,8 @@ public class Pessoa implements Serializable {
 
 	}
 
-	public Pessoa(Integer id, String nome, Date nascimento, String email, String login, String senha,
-			TipoUsuario tipoUsuario, Status status) {
+	public Pessoa(Integer id, String nome, Date nascimento, String email, String login, String senha, TipoCliente tipo,
+			Status status) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -58,8 +57,10 @@ public class Pessoa implements Serializable {
 		this.email = email;
 		this.login = login;
 		this.senha = senha;
-		// this.tipoUsuario = tipoUsuario;
-		// this.status = status;
+		this.tipo = tipo.getCod();
+		this.status = status.getCod();
+		
+		// Para pegar o tipo int preciso acessar o getCod() - tipo.getCod()
 	}
 
 	public Pessoa(Integer id, String nome, Date nascimento, String email, String login, String senha) {
@@ -120,16 +121,22 @@ public class Pessoa implements Serializable {
 		this.senha = senha;
 	}
 
-	/**
-	 * public TipoUsuario getTipoUsuario() { return tipoUsuario; }
-	 * 
-	 * public void setTipoUsuario(TipoUsuario tipoUsuario) { this.tipoUsuario =
-	 * tipoUsuario; }
-	 * 
-	 * public Status getStatus() { return status; }
-	 * 
-	 * public void setStatus(Status status) { this.status = status; }
-	 **/
+	public TipoCliente getTipo() {
+		return TipoCliente.toEnum(tipo);
+		// chama o metodo statico do enum 
+	}
+
+	public void setTipo(TipoCliente tipo) {
+		this.tipo = tipo.getCod();
+	}
+
+	public Status getStatus() {
+		return Status.toEnum(status);
+	}
+
+	public void setStatus(Status status) {
+		this.status = status.getCod();
+	}
 
 	public List<Filme> getFilmes() {
 		return filmes;
