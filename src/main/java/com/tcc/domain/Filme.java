@@ -18,6 +18,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -51,6 +52,8 @@ public class Filme implements Serializable {
 	@OneToMany(mappedBy = "id.filme") // id.ator estudar o caso
 	private Set<Personagem> personagem = new HashSet<>();
 
+	List<Pessoa> pessoas = new ArrayList<>();
+
 	public Filme() {
 
 	}
@@ -72,6 +75,14 @@ public class Filme implements Serializable {
 			lista.add(p.getAtor());
 		}
 		return lista;
+	}
+
+	public List<Pessoa> getPessoas() {
+		return pessoas;
+	}
+	@ManyToMany(mappedBy ="filmes")
+	public void setPessoas(List<Pessoa> pessoas) {
+		this.pessoas = pessoas;
 	}
 
 	public Integer getId() {

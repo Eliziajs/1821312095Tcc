@@ -1,5 +1,6 @@
 package com.tcc;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,13 @@ import com.tcc.domain.Diretor;
 import com.tcc.domain.Filme;
 import com.tcc.domain.Genero;
 import com.tcc.domain.Personagem;
+import com.tcc.domain.Pessoa;
 import com.tcc.repository.AtorRepository;
 import com.tcc.repository.DiretorRepository;
 import com.tcc.repository.FilmeRepository;
 import com.tcc.repository.GeneroRepository;
 import com.tcc.repository.PersonagemRepository;
+import com.tcc.repository.PessoaRepository;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
@@ -31,6 +34,8 @@ public class Application implements CommandLineRunner {
 	private AtorRepository atorRepository;
 	@Autowired
 	private PersonagemRepository personagemRepository;
+	@Autowired
+	private PessoaRepository pessoaRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -41,38 +46,45 @@ public class Application implements CommandLineRunner {
 
 		Genero gen1 = new Genero(null, "Drama Policial");
 		Genero gen2 = new Genero(null, "Terror");
-		
+
 		Diretor d1 = new Diretor(null, "Tarantino");
 		Diretor d2 = new Diretor(null, "Stanley");
-		
-		Ator ator1 = new Ator (null, "John Travolta");
-		Ator ator2 = new Ator (null, "Jack Nicholson");
-		
-		
-		
+
+		Ator ator1 = new Ator(null, "John Travolta");
+		Ator ator2 = new Ator(null, "Jack Nicholson");
+
 		Filme f1 = new Filme(null, "Pulp Fiction", 1994, "Violento demais ", gen1, d1);
 		Filme f2 = new Filme(null, "O iluminado", 1980, "vigia em um hotel no Colorado ", gen2, d2);
-		
-		Personagem pers1 = new Personagem("Vicente Vegas",f1,ator1);
-		Personagem pers2 = new Personagem("Personagem", f2,ator2);
+
+		Personagem pers1 = new Personagem("Vicente Vegas", f1, ator1);
+		Personagem pers2 = new Personagem("Personagem", f2, ator2);
 
 		gen1.getFilmes().addAll(Arrays.asList(f1));
 		gen2.getFilmes().addAll(Arrays.asList(f2));
-		
+
 		d1.getFilmes().addAll(Arrays.asList(f1));
 		d2.getFilmes().addAll(Arrays.asList(f2));
-		
+
 		ator1.getPersonagem().addAll(Arrays.asList(pers1));
 		ator2.getPersonagem().addAll(Arrays.asList(pers2));
 		
-	//f1.getPersonagem().addAll(Arrays.asList(ator1));
+		//f1.getPersonagem().add((Personagem) Arrays.asList(ator1));
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy hh:mm");
 		
-	
+		Pessoa p1 = new Pessoa(null, "Elizia", sdf.parse("20/09/1980 00:00"), "eliziajs@gmail.com", "Elizia","$$$$$");
+		Pessoa p2 = new Pessoa(null, "João", sdf.parse("04/07/1981 00:00"), "joao@xmail.com", "joão","$$$$$");
+		Pessoa p3 = new Pessoa(null, "Jose", sdf.parse("04/07/1983 00:00"), "jose@xmail.com", "Jose","$$$$$");
+		Pessoa p4 = new Pessoa(null, "Maria", sdf.parse("20/11/1999 00:00"), "maria@xmail.com", "Elizia","$$$$$");
+		
+		p2.getFilmes().addAll(Arrays.asList(f1));
+		p4.getFilmes().addAll(Arrays.asList(f2));
+
 		generoRepository.saveAll(Arrays.asList(gen1, gen2));
-		diretorRepository.saveAll(Arrays.asList(d1,d2));
+		diretorRepository.saveAll(Arrays.asList(d1, d2));
 		filmeRepository.saveAll(Arrays.asList(f1, f2));
 		atorRepository.saveAll(Arrays.asList(ator1, ator2));
-		personagemRepository.saveAll(Arrays.asList(pers1,pers2));
+		personagemRepository.saveAll(Arrays.asList(pers1, pers2));
+		pessoaRepository.saveAll(Arrays.asList(p1,p2,p3,p4));
 		
 
 	}

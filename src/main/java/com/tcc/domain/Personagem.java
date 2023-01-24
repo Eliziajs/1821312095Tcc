@@ -11,27 +11,26 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="personagens")
+@Table(name = "personagens")
 public class Personagem implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@JsonIgnore
 	@EmbeddedId
 	private PersonagemPK id = new PersonagemPK();
-	@Column(name="nome")
+	@Column(name = "nome")
 	private String nome;
-	
+
 	public Personagem() {
-		
+
 	}
-	
+
 	public Personagem(String nome, Filme filme, Ator ator) {
 		super();
 		this.nome = nome;
 		id.setAtor(ator);
 		id.setFilme(filme);
 	}
-	
 
 	public String getNome() {
 		return nome;
@@ -44,14 +43,16 @@ public class Personagem implements Serializable {
 	public PersonagemPK getId() {
 		return id;
 	}
-	
+
 	public void setId(PersonagemPK id) {
 		this.id = id;
 	}
+
 	@JsonIgnore
 	public Filme getFilme() {
 		return id.getFilme();
 	}
+
 	@JsonIgnore
 	public Ator getAtor() {
 		return id.getAtor();
@@ -73,5 +74,5 @@ public class Personagem implements Serializable {
 		Personagem other = (Personagem) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 }

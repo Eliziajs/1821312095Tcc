@@ -18,27 +18,27 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="atores")
+@Table(name = "atores")
 public class Ator implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@Column(name="id")
+	@Column(name = "id")
 	private Integer id;
-	@Column(name="nome")
+	@Column(name = "nome")
 	private String nome;
 
 	List<Filme> filmes = new ArrayList<>();
-	
+
 	@JsonBackReference
-	@OneToMany(mappedBy="id.ator")
+	@OneToMany(mappedBy = "id.ator")
 	private Set<Personagem> personagem = new HashSet<>();
 
 	public Ator() {
 
 	}
-	
+
 	public Ator(Integer id, String nome) {
 		super();
 		this.id = id;
@@ -60,8 +60,7 @@ public class Ator implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	
+
 	public Set<Personagem> getPersonagem() {
 		return personagem;
 	}
@@ -86,7 +85,5 @@ public class Ator implements Serializable {
 		Ator other = (Ator) obj;
 		return Objects.equals(id, other.id);
 	}
-
-	
 
 }

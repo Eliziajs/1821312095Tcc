@@ -8,7 +8,6 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-
 @Embeddable
 public class PersonagemPK implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -16,11 +15,11 @@ public class PersonagemPK implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "filme_id")
 	private Filme filme;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "ator_id")
 	private Ator ator;
-	
+
 	public Filme getFilme() {
 		return filme;
 	}

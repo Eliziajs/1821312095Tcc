@@ -16,20 +16,20 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="diretores")
+@Table(name = "diretores")
 public class Diretor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@Column(name="id")
+	@Column(name = "id")
 	private Integer id;
-	@Column(name="nome")
+	@Column(name = "nome")
 	private String nome;
-	
+
 	@JsonBackReference
 	@OneToMany(mappedBy = "diretor")
-	
+
 	List<Filme> filmes = new ArrayList<>();
 
 	public Diretor() {
