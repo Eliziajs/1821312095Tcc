@@ -6,6 +6,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,14 +39,40 @@ public class Pessoa implements Serializable {
 	private String login;
 	@Column(name = "senha")
 	private String senha;
-
+	@Column(name = "tipo")
 	private int tipo;
+	@Column(name = "status")
 	private int status; // ver jakarta transtion
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "PESSOA_FILME", joinColumns = @JoinColumn(name = "pessoa_id"), inverseJoinColumns = @JoinColumn(name = "filme_id"))
-
 	private List<Filme> filmes = new ArrayList<>();
+
+	@JsonManagedReference
+	@ManyToMany(cascade=CascadeType.PERSIST)
+	@JoinTable(name = "PESSOA_MENSAGEM", joinColumns = @JoinColumn(name = "pessoam_id"), inverseJoinColumns = @JoinColumn(name = "mensagem_id"))
+	private List<Mensagem> mensagens = new ArrayList<>();
+
+	public Pessoa(Integer id, String nome, Date nascimento, String email, String login, String senha, int tipo,
+			int status, List<Filme> filmes, List<Mensagem> mensagens) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.nascimento = nascimento;
+		this.email = email;
+		this.login = login;
+		this.senha = senha;
+		this.tipo = tipo;
+		this.status = status;
+		this.filmes = filmes;
+		this.mensagens = mensagens;
+	}
+
+	public Pessoa(List<Mensagem> mensagens) {
+		super();
+		this.mensagens = mensagens;
+	}
 
 	public Pessoa() {
 
@@ -59,18 +89,8 @@ public class Pessoa implements Serializable {
 		this.senha = senha;
 		this.tipo = tipo.getCod();
 		this.status = status.getCod();
-		
-		// Para pegar o tipo int preciso acessar o getCod() - tipo.getCod()
-	}
 
-	public Pessoa(Integer id, String nome, Date nascimento, String email, String login, String senha) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.nascimento = nascimento;
-		this.email = email;
-		this.login = login;
-		this.senha = senha;
+		// Para pegar o tipo int preciso acessar o getCod() - tipo.getCod()
 	}
 
 	public Integer getId() {
@@ -123,7 +143,7 @@ public class Pessoa implements Serializable {
 
 	public TipoCliente getTipo() {
 		return TipoCliente.toEnum(tipo);
-		// chama o metodo statico do enum 
+		// chama o metodo statico do enum
 	}
 
 	public void setTipo(TipoCliente tipo) {
@@ -145,6 +165,14 @@ public class Pessoa implements Serializable {
 	public void setFilmes(List<Filme> filmes) {
 		this.filmes = filmes;
 	}
+	public List<Mensagem> getMensagens() {
+		return mensagens;
+	}
+
+	public void setMensagens(List<Mensagem> mensagens) {
+		this.mensagens = mensagens;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -163,4 +191,5 @@ public class Pessoa implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 
+	
 }

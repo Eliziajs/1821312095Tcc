@@ -33,7 +33,6 @@ public class Genero implements Serializable {
 
 	@JsonBackReference
 	@OneToMany(mappedBy = "generos")
-
 	List<Filme> filmes = new ArrayList<>();
 
 	public Genero(Integer id, String descricao) {

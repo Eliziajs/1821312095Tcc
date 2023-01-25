@@ -5,9 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tcc.domain.Ator;
 import com.tcc.domain.Pessoa;
-import com.tcc.repository.AtorRepository;
 import com.tcc.repository.PessoaRepository;
 import com.tcc.services.exception.ObjetoNaoEncontrado;
 

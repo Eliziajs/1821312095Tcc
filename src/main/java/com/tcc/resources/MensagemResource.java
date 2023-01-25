@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tcc.domain.Pessoa;
-import com.tcc.services.PessoaService;
+import com.tcc.domain.Mensagem;
+import com.tcc.services.MensagemService;
 
 @RestController
-@RequestMapping(value = "/pessoa")
-public class PessoaResource {
+@RequestMapping(value = "/mensagem")
+public class MensagemResource {
 
 	@Autowired
-	private PessoaService service;
+	private MensagemService service;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Optional<Pessoa>> find(@PathVariable Integer id) {
-		Optional<Pessoa> obj = service.buscar(id);
+	public ResponseEntity<Optional<Mensagem>> find(@PathVariable Integer id) {
+		Optional<Mensagem> obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj);
 	}
 }

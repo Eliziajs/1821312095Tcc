@@ -29,7 +29,6 @@ public class Diretor implements Serializable {
 
 	@JsonBackReference
 	@OneToMany(mappedBy = "diretor")
-
 	List<Filme> filmes = new ArrayList<>();
 
 	public Diretor() {
