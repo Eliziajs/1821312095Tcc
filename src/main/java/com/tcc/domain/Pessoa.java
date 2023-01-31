@@ -43,6 +43,8 @@ public class Pessoa implements Serializable {
 	private int tipo;
 	@Column(name = "status")
 	private int status; // ver jakarta transtion
+	@Column(name = "dataCadastro")
+	private Date dataCadastro = new Date();
 
 	@JsonIgnore
 	@ManyToMany
@@ -55,7 +57,7 @@ public class Pessoa implements Serializable {
 	private List<Mensagem> mensagens = new ArrayList<>();
 
 	public Pessoa(Integer id, String nome, Date nascimento, String email, String login, String senha, int tipo,
-			int status, List<Filme> filmes, List<Mensagem> mensagens) {
+			int status, List<Filme> filmes, List<Mensagem> mensagens, Date dataCadastro) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -67,6 +69,7 @@ public class Pessoa implements Serializable {
 		this.status = status;
 		this.filmes = filmes;
 		this.mensagens = mensagens;
+		this.dataCadastro = dataCadastro;
 	}
 
 	public Pessoa(List<Mensagem> mensagens) {
@@ -79,7 +82,7 @@ public class Pessoa implements Serializable {
 	}
 
 	public Pessoa(Integer id, String nome, Date nascimento, String email, String login, String senha, TipoCliente tipo,
-			Status status) {
+			Status status, Date dataCadastro) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -89,6 +92,7 @@ public class Pessoa implements Serializable {
 		this.senha = senha;
 		this.tipo = tipo.getCod();
 		this.status = status.getCod();
+		this.dataCadastro = dataCadastro;
 
 		// Para pegar o tipo int preciso acessar o getCod() - tipo.getCod()
 	}
@@ -173,6 +177,14 @@ public class Pessoa implements Serializable {
 		this.mensagens = mensagens;
 	}
 
+
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
 
 	@Override
 	public int hashCode() {

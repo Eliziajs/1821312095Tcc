@@ -8,7 +8,6 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,6 +29,9 @@ public class Mensagem implements Serializable {
 	private String mensagem;
 	@Column(name = "Data")
 	private Date data;
+	@Column(name = "tipoMsg")
+	private int tipoMsg;
+	
 
 	@JsonIgnore
 	@ManyToMany (mappedBy = "mensagens")
@@ -38,14 +40,16 @@ public class Mensagem implements Serializable {
 	public Mensagem() {
 		
 	}
-	public Mensagem(Integer id, String mensagem, Date data) {
+	public Mensagem(Integer id, String mensagem, Date data, TipoMensagem tipoMsg) {
 		super();
 		this.id = id;
 		this.mensagem = mensagem;
 		this.data = data;
+		this.tipoMsg = tipoMsg.getCod();
 		
 	}
-
+	
+	
 	public List<Pessoa> getPessoas() {
 		return pessoas;
 	}
@@ -78,6 +82,10 @@ public class Mensagem implements Serializable {
 		this.data = data;
 	}
 
+	public TipoMensagem getTipoMsg() {
+		return TipoMensagem.toEnum(tipoMsg);
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

@@ -2,6 +2,7 @@ package com.tcc;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,6 +18,7 @@ import com.tcc.domain.Personagem;
 import com.tcc.domain.Pessoa;
 import com.tcc.domain.Status;
 import com.tcc.domain.TipoCliente;
+import com.tcc.domain.TipoMensagem;
 import com.tcc.repository.AtorRepository;
 import com.tcc.repository.DiretorRepository;
 import com.tcc.repository.FilmeRepository;
@@ -50,6 +52,9 @@ public class Application implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy hh:mm");
+		Date dt = new Date();
+		
 		Genero gen1 = new Genero(null, "Drama Policial");
 		Genero gen2 = new Genero(null, "Terror");
 
@@ -59,8 +64,8 @@ public class Application implements CommandLineRunner {
 		Ator ator1 = new Ator(null, "John Travolta");
 		Ator ator2 = new Ator(null, "Jack Nicholson");
 
-		Filme f1 = new Filme(null, "Pulp Fiction", 1994, "Violento demais ", gen1, d1);
-		Filme f2 = new Filme(null, "O iluminado", 1980, "vigia em um hotel no Colorado ", gen2, d2);
+		Filme f1 = new Filme(null, "Pulp Fiction", 1994, "Violento demais ", gen1, d1, dt);
+		Filme f2 = new Filme(null, "O iluminado", 1980, "vigia em um hotel no Colorado ", gen2, d2,dt);
 
 		Personagem pers1 = new Personagem("Vicente Vegas", f1, ator1);
 		Personagem pers2 = new Personagem("Personagem", f2, ator2);
@@ -75,25 +80,34 @@ public class Application implements CommandLineRunner {
 		ator2.getPersonagem().addAll(Arrays.asList(pers2));
 
 		// f1.getPersonagem().add((Personagem) Arrays.asList(ator1));
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy hh:mm");
+		//SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy hh:mm");
+		//Date dt = new Date();
 
 		Pessoa p1 = new Pessoa(null, "Elizia", sdf.parse("20/09/1980 00:00"), "eliziajs@gmail.com", "Elizia", "$$$$$",
-				TipoCliente.ADMINISTRADOR, Status.ATIVO);
+				TipoCliente.ADMINISTRADOR, Status.ATIVO,dt);
 		Pessoa p2 = new Pessoa(null, "João", sdf.parse("04/07/1981 00:00"), "joao@xmail.com", "joão", "$$$$$",
-				TipoCliente.USUARIO, Status.ATIVO);
+				TipoCliente.USUARIO, Status.ATIVO,dt);
 		Pessoa p3 = new Pessoa(null, "Jose", sdf.parse("04/07/1983 00:00"), "jose@xmail.com", "Jose", "$$$$$",
-				TipoCliente.USUARIO, Status.ATIVO);
+				TipoCliente.USUARIO, Status.ATIVO, dt);
 		Pessoa p4 = new Pessoa(null, "Maria", sdf.parse("20/11/1999 00:00"), "maria@xmail.com", "Elizia", "$$$$$",
-				TipoCliente.USUARIO, Status.INATIVO);
+				TipoCliente.USUARIO, Status.INATIVO, dt );
 
-		Mensagem msg1 = new Mensagem(null, "Nada a ver essa sinpse #$*:(", sdf.parse("04/12/2022 00:00"));
-		Mensagem msg2 = new Mensagem(null, "Esse filme é muito sinistro", sdf.parse("10/01/2023 00:00"));
+		Mensagem msg1 = new Mensagem(null, "Nada a ver essa sinpse #$*:(", sdf.parse("04/12/2022 00:00"),
+				TipoMensagem.COMENTARIO);
+		Mensagem msg2 = new Mensagem(null, "Esse filme é muito sinistro", sdf.parse("10/01/2023 00:00"), 
+				TipoMensagem.COMENTARIO);
+		Mensagem msg3 = new Mensagem(null, "O josé me persegue", sdf.parse("05/12/2022 00:00"), 
+				TipoMensagem.DENUNCIA);
+		Mensagem msg4 = new Mensagem(null, "Pessoa advertida", sdf.parse("06/12/2022 00:00"), 
+				TipoMensagem.RESPOSTA);
 
 		p2.getFilmes().addAll(Arrays.asList(f1));
 		p4.getFilmes().addAll(Arrays.asList(f2));
 
 		msg1.getPessoas().addAll(Arrays.asList(p2));
 		msg2.getPessoas().addAll(Arrays.asList(p3));
+		msg3.getPessoas().addAll(Arrays.asList(p2));
+		msg4.getPessoas().addAll(Arrays.asList(p2));
 
 		p4.getMensagens().addAll(Arrays.asList(msg2));
 		p1.getMensagens().addAll(Arrays.asList(msg1));
@@ -105,7 +119,7 @@ public class Application implements CommandLineRunner {
 		atorRepository.saveAll(Arrays.asList(ator1, ator2));
 		personagemRepository.saveAll(Arrays.asList(pers1, pers2));
 		pessoaRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
-		mensagemRepository.saveAll(Arrays.asList(msg1, msg2));
+		mensagemRepository.saveAll(Arrays.asList(msg1, msg2,msg3,msg4));
 
 	}
 

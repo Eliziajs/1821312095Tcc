@@ -4,6 +4,7 @@ package com.tcc.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -18,8 +19,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -38,6 +37,8 @@ public class Filme implements Serializable {
 	private Integer ano;
 	@Column(name = "sinopse")
 	private String sinopse;
+	@Column(name = "dataCadastro")
+	private Date dataCadastro = new Date();
 
 	@JsonManagedReference
 	@ManyToOne
@@ -59,7 +60,7 @@ public class Filme implements Serializable {
 
 	}
 
-	public Filme(Integer id, String titulo, Integer ano, String sinopse, Genero generos, Diretor diretor) {
+	public Filme(Integer id, String titulo, Integer ano, String sinopse, Genero generos, Diretor diretor, Date dataCadastro) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -67,6 +68,7 @@ public class Filme implements Serializable {
 		this.sinopse = sinopse;
 		this.generos = generos;
 		this.diretor = diretor;
+		this.dataCadastro = dataCadastro;
 
 	}
 
@@ -112,6 +114,15 @@ public class Filme implements Serializable {
 
 	public void setSinopse(String sinopse) {
 		this.sinopse = sinopse;
+	}
+	
+
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 
 	public Genero getGeneros() {

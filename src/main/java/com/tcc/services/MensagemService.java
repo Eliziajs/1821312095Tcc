@@ -19,6 +19,6 @@ public class MensagemService {
 		Optional<Mensagem> obj = repo.findById(id);
 
 		return Optional.ofNullable(obj.orElseThrow(() -> new ObjetoNaoEncontrado(
-				"Mensagem ainda não cadastrado! Id:" + id + ", Tipo: " + Mensagem.class.getName())));
+				"A Mensagem ainda não foi cadastrada! Id:" + id + ", Tipo: " + Mensagem.class.getName())));
 	}
 }
