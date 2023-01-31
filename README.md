@@ -1,7 +1,14 @@
 # 1821312095Tcc
 Este projeto é parte do trabalho de conclusão de curso em TADS (UERJ).  O trabalho estão baseados nos diagrama de caso de uso e de classes orientados à objeto. Vale ressaltar que os diagramas citados estão em constante aperfeiçoamento.
 
-![Caso de uso Cinemateca](https://user-images.githubusercontent.com/56489780/214709635-c179509f-15ae-4620-96cc-b48b4da74e54.png)
-![Diagrama de Classe Orientada a Objeto 30012023 v1](https://user-images.githubusercontent.com/56489780/215630685-e809027b-6800-4593-b7e1-f3367725c4c3.png)
-![Instancia 30012023 v1](https://user-images.githubusercontent.com/56489780/215630697-9774e40b-3a59-423e-9674-d5a86dbc497d.png)
-![Diagrama de classe complementar 30012023 v1](https://user-images.githubusercontent.com/56489780/215630704-090a4385-b20d-4b5a-8859-96b729f8b7b5.png)
+Diagrama de caso de uso
+![Caso de uso Cinemateca 30012023 v1](https://user-images.githubusercontent.com/56489780/215630924-a4132212-7c9b-43f9-8a09-cd95baf706d8.png)
+
+Diagrama de Classes
+![Diagrama de Classe Orientada a Objeto 30012023 v1](https://user-images.githubusercontent.com/56489780/215631004-0873fe6d-c8b3-4490-9388-719b8cf8ae99.png)
+
+ Enumerações 
+ ![Diagrama de classe complementar 30012023 v1](https://user-images.githubusercontent.com/56489780/215631357-aba7bfdb-8343-4c24-9d98-9538c7e3f312.png)
+
+Instanciação de classes
+![Instancia 30012023 v1](https://user-images.githubusercontent.com/56489780/215631210-8ad9c4ae-af3e-4743-a4eb-b8434b17da11.png)
