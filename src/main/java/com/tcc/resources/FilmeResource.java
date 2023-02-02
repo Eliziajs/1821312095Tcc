@@ -1,5 +1,6 @@
 package com.tcc.resources;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tcc.domain.Filme;
 import com.tcc.services.FilmeService;
+
+
+//fazer lista:
+//somente de filmes
+//filmes e lista de filmes completos ( ja tem)
 
 @Controller
 @RequestMapping(value="/filme")
@@ -24,5 +30,10 @@ public class FilmeResource {
 		Optional<Filme> obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj);
 
+	}
+	@GetMapping
+	public ResponseEntity<List<Filme>> getAll() {
+		ResponseEntity<List<Filme>> obj = service.listarTodos();
+		return obj;
 	}
 }

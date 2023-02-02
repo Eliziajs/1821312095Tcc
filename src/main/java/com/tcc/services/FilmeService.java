@@ -1,8 +1,11 @@
 package com.tcc.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -21,5 +24,9 @@ public class FilmeService {
 		return Optional.ofNullable(obj.orElseThrow(() -> new ObjetoNaoEncontrado(
 				" Filme ainda não cadastrado! Id:" + id + ", Tipo: " + Filme.class.getName())));
 
+	}
+	public ResponseEntity<List<Filme>> listarTodos(){
+		List<Filme> obj = repo.findAll();
+		return new ResponseEntity<>(obj,HttpStatus.OK);
 	}
 }

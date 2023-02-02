@@ -1,5 +1,6 @@
 package com.tcc.resources;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,4 +25,11 @@ public class AtorResource {
 		Optional<Ator> obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj);
 	}
+
+	@GetMapping
+	public ResponseEntity<List<Ator>> getAll() {
+		ResponseEntity<List<Ator>> obj = service.listarTodos();
+		return obj;
+	}
+
 }
