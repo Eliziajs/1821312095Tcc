@@ -1,7 +1,6 @@
 package com.tcc.resources;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tcc.domain.Diretor;
-import com.tcc.repository.DiretorRepository;
 import com.tcc.services.DiretorService;
 
 @RestController
@@ -23,8 +21,7 @@ public class DiretorResource {
 
 	@Autowired
 	private DiretorService service;
-	@Autowired
-	private DiretorRepository repo;
+
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Diretor>> find(@PathVariable Integer id) {
@@ -37,15 +34,11 @@ public class DiretorResource {
 		ResponseEntity<List<Diretor>> obj = service.listarTodos();
 		return obj;
 	}
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Optional<Diretor>> deleteById(@PathVariable Integer id) {
+	public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
 
-		try {
-			repo.deleteById(id);
-			return new ResponseEntity<Optional<Diretor>>(HttpStatus.OK);
-		} catch (NoSuchElementException nsee) {
-			return new ResponseEntity<Optional<Diretor>>(HttpStatus.NOT_FOUND);
-		}
-
+		service.deletar(id);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }

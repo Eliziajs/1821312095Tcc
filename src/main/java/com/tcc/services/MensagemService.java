@@ -24,8 +24,15 @@ public class MensagemService {
 		return Optional.ofNullable(obj.orElseThrow(() -> new ObjetoNaoEncontrado(
 				"A Mensagem ainda não foi cadastrada! Id:" + id + ", Tipo: " + Mensagem.class.getName())));
 	}
-	public ResponseEntity<List<Mensagem>> listarTodos(){
+
+	public ResponseEntity<List<Mensagem>> listarTodos() {
 		List<Mensagem> obj = repo.findAll();
-		return new ResponseEntity<>(obj,HttpStatus.OK);
+		return new ResponseEntity<>(obj, HttpStatus.OK);
+	}
+
+	public void deletar(Integer id) {
+		buscar(id);
+		repo.deleteById(id);
+
 	}
 }

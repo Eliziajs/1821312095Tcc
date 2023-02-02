@@ -18,15 +18,22 @@ public class FilmeService {
 
 	@Autowired
 	FilmeRepository repo;
-	
+
 	public Optional<Filme> buscar(@PathVariable Integer id) {
 		Optional<Filme> obj = repo.findById(id);
 		return Optional.ofNullable(obj.orElseThrow(() -> new ObjetoNaoEncontrado(
 				" Filme ainda não cadastrado! Id:" + id + ", Tipo: " + Filme.class.getName())));
 
 	}
-	public ResponseEntity<List<Filme>> listarTodos(){
+
+	public ResponseEntity<List<Filme>> listarTodos() {
 		List<Filme> obj = repo.findAll();
-		return new ResponseEntity<>(obj,HttpStatus.OK);
+		return new ResponseEntity<>(obj, HttpStatus.OK);
+	}
+
+	public void deletar(Integer id) {
+		buscar(id);
+		repo.deleteById(id);
+
 	}
 }

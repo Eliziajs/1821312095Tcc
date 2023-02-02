@@ -1,7 +1,6 @@
 package com.tcc.resources;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tcc.domain.Pessoa;
-import com.tcc.repository.PessoaRepository;
+
 import com.tcc.services.PessoaService;
 
-//fazer lista:
-//somente pessoas
+
 
 @RestController
 @RequestMapping(value = "/pessoa")
@@ -26,8 +24,6 @@ public class PessoaResource {
 
 	@Autowired
 	private PessoaService service;
-	@Autowired
-	private PessoaRepository repo;
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Optional<Pessoa>> find(@PathVariable Integer id) {
@@ -40,16 +36,11 @@ public class PessoaResource {
 		ResponseEntity<List<Pessoa>> obj = service.listarTodos();
 		return obj;
 	}
-
+	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Optional<Pessoa>> deleteById(@PathVariable Integer id) {
-
-		try {
-			repo.deleteById(id);
-			return new ResponseEntity<Optional<Pessoa>>(HttpStatus.OK);
-		} catch (NoSuchElementException nsee) {
-			return new ResponseEntity<Optional<Pessoa>>(HttpStatus.NOT_FOUND);
-		}
-
+	public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
+		
+		service.deletar(id);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }

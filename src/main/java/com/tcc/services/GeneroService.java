@@ -24,8 +24,15 @@ public class GeneroService {
 		return Optional.ofNullable(obj.orElseThrow(() -> new ObjetoNaoEncontrado(
 				"Genero ainda não cadastrado! Id:" + id + ", Tipo: " + Genero.class.getName())));
 	}
-	public ResponseEntity<List<Genero>> listarTodos(){
+
+	public ResponseEntity<List<Genero>> listarTodos() {
 		List<Genero> obj = repo.findAll();
-		return new ResponseEntity<>(obj,HttpStatus.OK);
+		return new ResponseEntity<>(obj, HttpStatus.OK);
+	}
+
+	public void deletar(Integer id) {
+		buscar(id);
+		repo.deleteById(id);
+
 	}
 }

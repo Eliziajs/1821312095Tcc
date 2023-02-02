@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.tcc.domain.Diretor;
 import com.tcc.domain.Pessoa;
 import com.tcc.repository.PessoaRepository;
 import com.tcc.services.exception.ObjetoNaoEncontrado;
@@ -31,7 +30,7 @@ public class PessoaService {
 		Optional<Pessoa> obj = repo.findById(id);
 
 		return Optional.ofNullable(obj.orElseThrow(() -> new ObjetoNaoEncontrado(
-				"Pessoa ainda não cadastrado! Id:" + id + ", Tipo: " + Pessoa.class.getName())));
+				"Pessoa não cadastrada! Id:" + id + ", Tipo: " + Pessoa.class.getName())));
 	}
 
 	public ResponseEntity<List<Pessoa>> listarTodos() {
@@ -39,4 +38,10 @@ public class PessoaService {
 		return new ResponseEntity<>(obj, HttpStatus.OK);
 	}
 
+	public void deletar(Integer id) {
+		buscar(id);
+		repo.deleteById(id);
+		
+	}
+	
 }

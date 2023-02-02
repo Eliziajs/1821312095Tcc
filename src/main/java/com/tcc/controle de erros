@@ -1,0 +1,3 @@
+* a função delete precisa avaliar os relacionamentos para funcionar, esceto pessoa.
+* a função listar da classe pesonagemresouces exibe erro 500
+*fazer lista: somente pessoas

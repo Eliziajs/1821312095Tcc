@@ -24,9 +24,15 @@ public class DiretorService {
 
 	}
 
-	public ResponseEntity<List<Diretor>> listarTodos(){
+	public ResponseEntity<List<Diretor>> listarTodos() {
 		List<Diretor> obj = repo.findAll();
-		return new ResponseEntity<>(obj,HttpStatus.OK);
+		return new ResponseEntity<>(obj, HttpStatus.OK);
 	}
-	
+
+	public void deletar(Integer id) {
+		buscar(id);
+		repo.deleteById(id);
+
+	}
+
 }
