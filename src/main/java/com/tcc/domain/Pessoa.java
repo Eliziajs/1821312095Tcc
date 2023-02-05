@@ -52,11 +52,11 @@ public class Pessoa implements Serializable {
 	private List<Filme> filmes = new ArrayList<>();
 
 	@JsonManagedReference
-	@ManyToMany(cascade=CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "PESSOA_MENSAGEM", joinColumns = @JoinColumn(name = "pessoam_id"), inverseJoinColumns = @JoinColumn(name = "mensagem_id"))
 	private List<Mensagem> mensagens = new ArrayList<>();
 
-	public Pessoa(Integer id, String nome, Date nascimento, String email, String login, String senha, int tipo,
+	/**public Pessoa(Integer id, String nome, Date nascimento, String email, String login, String senha, int tipo,
 			int status, List<Filme> filmes, List<Mensagem> mensagens, Date dataCadastro) {
 		super();
 		this.id = id;
@@ -70,7 +70,7 @@ public class Pessoa implements Serializable {
 		this.filmes = filmes;
 		this.mensagens = mensagens;
 		this.dataCadastro = dataCadastro;
-	}
+	}**/
 
 	public Pessoa(List<Mensagem> mensagens) {
 		super();
@@ -93,6 +93,21 @@ public class Pessoa implements Serializable {
 		this.tipo = tipo.getCod();
 		this.status = status.getCod();
 		this.dataCadastro = dataCadastro;
+
+		// Para pegar o tipo int preciso acessar o getCod() - tipo.getCod()
+	}
+	
+	public Pessoa(String nome, Date nascimento, String email, String login, String senha, TipoCliente tipo,
+			Status status) {
+		super();
+		this.nome = nome;
+		this.nascimento = nascimento;
+		this.email = email;
+		this.login = login;
+		this.senha = senha;
+		this.tipo = tipo.getCod();
+		this.status = status.getCod();
+		
 
 		// Para pegar o tipo int preciso acessar o getCod() - tipo.getCod()
 	}
@@ -169,6 +184,7 @@ public class Pessoa implements Serializable {
 	public void setFilmes(List<Filme> filmes) {
 		this.filmes = filmes;
 	}
+
 	public List<Mensagem> getMensagens() {
 		return mensagens;
 	}
@@ -176,7 +192,6 @@ public class Pessoa implements Serializable {
 	public void setMensagens(List<Mensagem> mensagens) {
 		this.mensagens = mensagens;
 	}
-
 
 	public Date getDataCadastro() {
 		return dataCadastro;
@@ -203,5 +218,4 @@ public class Pessoa implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 
-	
 }

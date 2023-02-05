@@ -34,5 +34,5 @@ public class DiretorService {
 		repo.deleteById(id);
 
 	}
-
+	
 }

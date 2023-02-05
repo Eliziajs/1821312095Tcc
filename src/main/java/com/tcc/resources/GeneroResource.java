@@ -36,7 +36,7 @@ public class GeneroResource {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
+	public ResponseEntity<?> deleteById(@PathVariable Integer id) {
 
 		service.deletar(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);

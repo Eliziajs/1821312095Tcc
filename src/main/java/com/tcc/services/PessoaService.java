@@ -41,7 +41,12 @@ public class PessoaService {
 	public void deletar(Integer id) {
 		buscar(id);
 		repo.deleteById(id);
-		
+
 	}
+
+	public Pessoa criar(Pessoa pessoa) {
 	
+		return repo.save(pessoa);
+	}
+
 }
