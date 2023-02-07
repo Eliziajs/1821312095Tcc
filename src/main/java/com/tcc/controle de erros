@@ -2,3 +2,15 @@
 * a função listar da classe pesonagemresouces exibe erro 500
 *fazer lista: somente pessoas
 *criar Readme explicativo de como alguem pode testar meu codigo. Instruções
+
+spring.jpa.database=MYSQL
+spring.datasource.url=jdbc:mysql://localhost/cinebd?useTimezone=true&serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=123456
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+spring.jpa.show-sql: true
+spring.jpa.hibernate.ddl-auto=create
+
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.defer-datasource-initialization=true
