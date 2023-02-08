@@ -22,7 +22,7 @@ import com.tcc.domain.Pessoa;
 import com.tcc.services.PessoaService;
 
 @RestController
-//@RequestMapping(value = "/pessoa")
+@RequestMapping(value = "/pessoa")
 public class PessoaResource {
 
 	@Autowired
@@ -34,7 +34,7 @@ public class PessoaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path="/",produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Pessoa>> getAll() {
 		ResponseEntity<List<Pessoa>> obj = service.listarTodos();
 		return obj;
